@@ -1,31 +1,48 @@
-import { useState } from 'react';
-import { hello_backend } from 'declarations/hello_backend';
+import React, { useState } from 'react';
+import './index.scss';
 
-function App() {
-  const [greeting, setGreeting] = useState('');
+const App = () => {
+  const [notes, setNotes] = useState([]);
+  const [newNote, setNewNote] = useState('');
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const name = event.target.elements.name.value;
-    hello_backend.greet(name).then((greeting) => {
-      setGreeting(greeting);
-    });
-    return false;
-  }
+  const addNote = () => {
+    if (newNote.trim()) {
+      setNotes([...notes, newNote]);
+      setNewNote('');
+    }
+  };
+
+  const deleteNote = (index) => {
+    const updatedNotes = notes.filter((_, i) => i !== index);
+    setNotes(updatedNotes);
+  };
 
   return (
-    <main>
-      <img src="/logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#" onSubmit={handleSubmit}>
-        <label htmlFor="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting">{greeting}</section>
-    </main>
+    <div className="app">
+      <h1>Notes App</h1>
+      <div className="note-input">
+        <input
+          type="text"
+          value={newNote}
+          onChange={(e) => setNewNote(e.target.value)}
+          placeholder="Enter a new note"
+        />
+        <button onClick={addNote}>Add Note</button>
+      </div>
+      <div className="notes-list">
+        {notes.length > 0 ? (
+          notes.map((note, index) => (
+            <div key={index} className="note-item">
+              <span>{note}</span>
+              <button onClick={() => deleteNote(index)}>Delete</button>
+            </div>
+          ))
+        ) : (
+          <p>No notes available</p>
+        )}
+      </div>
+    </div>
   );
-}
+};
 
 export default App;

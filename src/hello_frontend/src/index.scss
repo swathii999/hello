@@ -1,37 +1,48 @@
-body {
-  font-family: sans-serif;
-  font-size: 1.5rem;
+
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-img {
-  max-width: 50vw;
-  max-height: 25vw;
-  display: block;
-  margin: auto;
-}
-
-form {
+.note-input {
   display: flex;
-  justify-content: center;
-  gap: 0.5em;
-  flex-flow: row wrap;
-  max-width: 40vw;
-  margin: auto;
-  align-items: baseline;
+  margin-bottom: 20px;
 }
 
-button[type="submit"] {
-  padding: 5px 20px;
-  margin: 10px auto;
-  float: right;
+.note-input input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
 }
 
-#greeting {
-  margin: 10px auto;
-  padding: 10px 60px;
-  border: 1px solid #222;
+.note-input button {
+  padding: 10px;
+  font-size: 16px;
+  margin-left: 10px;
 }
 
-#greeting:empty {
-  display: none;
+.notes-list {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.note-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.note-item button {
+  background-color: #f44;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.note-item button:hover {
+  background-color: #d33;
 }
